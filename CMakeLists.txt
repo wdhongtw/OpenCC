@@ -25,6 +25,7 @@ include (CTest)
 ######## Options
 option(BUILD_DOCUMENTATION "Use Doxygen to create the HTML based API documentation" OFF)
 option(BUILD_SHARED_LIBS "Build opencc as shared library" ON)
+option(OPENCC_SUPPORT_CXX_MODULE "Include C++ named module support" OFF)
 option(ENABLE_GTEST "Build all tests." OFF)
 option(ENABLE_BENCHMARK "Build benchmark tests." OFF)
 option(ENABLE_DARTS "Build DartsDict (ocd format)." ON)

@@ -121,6 +121,13 @@ target_include_directories(libopencc PUBLIC
     $<INSTALL_INTERFACE:${DIR_INCLUDE}/opencc>
 )
 
+if(OPENCC_SUPPORT_CXX_MODULE)
+  target_compile_features(libopencc PUBLIC cxx_std_20)
+  target_sources(libopencc PUBLIC
+    FILE_SET opencc_module TYPE CXX_MODULES FILES module/OpenCC.cppm
+  )
+endif()
+
 GENERATE_EXPORT_HEADER(
   libopencc
   BASE_NAME OPENCC
@@ -152,11 +159,16 @@ else()
   set(INSTALL_TARGETS libopencc marisa)
 endif()
 
+if(OPENCC_SUPPORT_CXX_MODULE)
+  set(OPENCC_MODULE_INSTALL FILE_SET opencc_module DESTINATION ${DIR_INCLUDE})
+endif()
+
 install(
   TARGETS ${INSTALL_TARGETS} EXPORT ${targets_export_name}
   LIBRARY DESTINATION ${DIR_LIBRARY}
   ARCHIVE DESTINATION ${DIR_LIBRARY}
   RUNTIME DESTINATION bin
+  ${OPENCC_MODULE_INSTALL}
 )
 
 install(
